@@ -1,0 +1,40 @@
+# Зависимости
+node_modules/
+
+# Логи
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# PID-файлы
+pids
+*.pid
+*.seed
+
+# Результаты тестов и покрытия
+coverage/
+.nyc_output/
+jest-debug.log
+
+# Сборки и бандлы
+dist/
+build/
+tmp/
+temp/
+
+# Env и секреты
+.env
+.env.local
+.env.*.local
+
+# Кэш и прочее
+.cache/
+.next/
+.nuxt/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
