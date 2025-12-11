@@ -3,6 +3,8 @@ import db from './models/index.js'
 import routes from './routes/index.js'
 
 const app = express()
+
+app.use(express.json())
 app.use('/api', routes)
 
 async function start() {
