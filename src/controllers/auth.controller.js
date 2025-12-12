@@ -1,5 +1,6 @@
 import db from '../models/index.js'
 import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
 
 const { User } = db
 
@@ -23,4 +24,36 @@ export async function register(req, res) {
   const user = await User.create({ username, email, password: hash })
 
   return res.status(201).json({ message: "Пользователь создан", user })
+}
+
+export async function login(req, res) {
+  const { username, password } = req.body
+
+  if (!username || !password) { 
+    return res.status(400).json({ message: "Заполните все поля" })
+  }
+
+  const user = await User.findOne({
+		where: { username },
+	})
+
+	if (!user) {
+		return res
+			.status(400)
+			.json({ message: 'Неверное имя пользователя или пароль' })
+	}
+
+  const valid = await bcrypt.compare(password, user.password)
+
+  if (!valid) {
+    return res.status(400).json({ message: 'Неверное имя пользователя или пароль'})
+  }
+
+  const token = jwt.sign(
+		{ id: user.id },
+		'B0jICjsJ2qUaSHfOTsDT3Cs5FAxMTBp84BWxYizopn6',
+    { expiresIn: "7d" }
+	)
+
+  return res.json({ token })
 }
