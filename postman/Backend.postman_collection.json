@@ -12,17 +12,27 @@
 				{
 					"name": "Получение задачи по id",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNzY1NTU2OTcwLCJleHAiOjE3NjYxNjE3NzB9.rXFIuo6wY2JcnbpKiq8MlS4bQAymaM7-GlHJgAigS6U",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/api/tasks/10",
+							"raw": "{{BASE_URL}}/api/tasks/13",
 							"host": [
 								"{{BASE_URL}}"
 							],
 							"path": [
 								"api",
 								"tasks",
-								"10"
+								"13"
 							]
 						}
 					},
@@ -31,6 +41,16 @@
 				{
 					"name": "Создание задачи",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNzY1NTU2OTcwLCJleHAiOjE3NjYxNjE3NzB9.rXFIuo6wY2JcnbpKiq8MlS4bQAymaM7-GlHJgAigS6U",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -59,6 +79,16 @@
 				{
 					"name": "Редактирование задачи",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNzY1NTU2OTcwLCJleHAiOjE3NjYxNjE3NzB9.rXFIuo6wY2JcnbpKiq8MlS4bQAymaM7-GlHJgAigS6U",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
@@ -71,14 +101,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/tasks/10",
+							"raw": "{{BASE_URL}}/api/tasks/13",
 							"host": [
 								"{{BASE_URL}}"
 							],
 							"path": [
 								"api",
 								"tasks",
-								"10"
+								"13"
 							]
 						}
 					},
@@ -87,17 +117,27 @@
 				{
 					"name": "Удаление задачи",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNzY1NTU2OTcwLCJleHAiOjE3NjYxNjE3NzB9.rXFIuo6wY2JcnbpKiq8MlS4bQAymaM7-GlHJgAigS6U",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/api/tasks/10",
+							"raw": "{{BASE_URL}}/api/tasks/13",
 							"host": [
 								"{{BASE_URL}}"
 							],
 							"path": [
 								"api",
 								"tasks",
-								"10"
+								"13"
 							]
 						}
 					},
@@ -106,6 +146,16 @@
 				{
 					"name": "Удаление всех задач",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNzY1NTU2OTcwLCJleHAiOjE3NjYxNjE3NzB9.rXFIuo6wY2JcnbpKiq8MlS4bQAymaM7-GlHJgAigS6U",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
@@ -125,6 +175,16 @@
 				{
 					"name": "Получение всех задач",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNzY1NTU2OTcwLCJleHAiOjE3NjYxNjE3NzB9.rXFIuo6wY2JcnbpKiq8MlS4bQAymaM7-GlHJgAigS6U",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -148,11 +208,51 @@
 				{
 					"name": "Регистрация",
 					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "payload",
+									"value": "{}",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"John\",\r\n    \"email\": \"john@dev.com\",\r\n    \"password\": \"123\"\r\n}",
+							"raw": "{\r\n    \"username\": \"Jack\",\r\n    \"email\": \"jack@dev.com\",\r\n    \"password\": \"123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -168,6 +268,34 @@
 								"api",
 								"auth",
 								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Вход",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Jack\",\r\n    \"password\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/auth/login",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
 							]
 						}
 					},
