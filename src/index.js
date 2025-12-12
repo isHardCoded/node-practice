@@ -12,7 +12,7 @@ async function start() {
     await db.sequelize.authenticate()
     console.log('DB connected')
 
-    await db.sequelize.sync()
+    await db.sequelize.sync({ alter: true })
 
     app.listen(3000, () => {
       console.log(`Server listening on port 3000`)

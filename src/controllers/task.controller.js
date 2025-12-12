@@ -2,14 +2,12 @@ import db from '../models/index.js'
 const { Task } = db;
 
 export async function getAllTasks(req, res) {
-  const tasks = await Task.findAll({
-    where: { userId: req.userId }
-  })
+  const tasks = await Task.findAll()
   return res.json({ data: tasks })
 }
 
 export async function getTaskById(req, res) {
-  const task = await Task.findByPk({
+  const task = await Task.findOne({
     where: { id: req.params.id, userId: req.userId }
   });
 
@@ -33,7 +31,7 @@ export async function createTask(req, res) {
 }
 
 export async function updateTask(req, res) {
-  const task = await Task.findByPk({
+  const task = await Task.findOne({
     where: { id: req.params.id, userId: req.userId}
   })
 
