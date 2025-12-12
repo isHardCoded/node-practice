@@ -2,13 +2,16 @@ import db from '../models/index.js'
 const { Task } = db;
 
 export async function getAllTasks(req, res) {
-  const tasks = await Task.findAll()
+  const tasks = await Task.findAll({
+    where: { userId: req.userId }
+  })
   return res.json({ data: tasks })
 }
 
 export async function getTaskById(req, res) {
-  const { id } = req.params
-  const task = await Task.findByPk(id);
+  const task = await Task.findByPk({
+    where: { id: req.params.id, userId: req.userId }
+  });
 
   if (!task) {
     return res.status(404).json({ message: 'Задача не найдена'})
@@ -24,23 +27,21 @@ export async function createTask(req, res) {
     return res.status(400).json({ error: "Заполните заголовок" })
   } 
 
-  const task = await Task.create({ title, description })
+  const task = await Task.create({ title, description, userId: req.userId })
 
   return res.status(201).json({ data: task })
 }
 
 export async function updateTask(req, res) {
-  const { id } = req.params
-
-  const task = await Task.findByPk(id)
+  const task = await Task.findByPk({
+    where: { id: req.params.id, userId: req.userId}
+  })
 
   if (!task) {
     return res.status(404).json({ message: "Задача не найдена"})
   }
 
-  const { title, description, completed } = req.body
-
-  await task.update({ title, description, completed })
+  await task.update(req.body)
   return res.json({ data: task })
 }
 
@@ -60,7 +61,7 @@ export async function deleteTask(req, res) {
 
 export async function deleteAllTasks(req, res) {
   await Task.destroy({
-    where: {},
+    where: { userId: req.userId },
   });
 
   return res.json({ message: "Все задачи удалены"})
