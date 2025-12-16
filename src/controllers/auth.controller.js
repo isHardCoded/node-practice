@@ -1,6 +1,11 @@
 import db from '../models/index.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+import dotenv from 'dotenv'
+
+dotenv.config()
+
+const SECRET_KEY = process.env.SECRET_KEY
 
 const { User } = db
 
@@ -49,11 +54,7 @@ export async function login(req, res) {
     return res.status(400).json({ message: 'Неверное имя пользователя или пароль'})
   }
 
-  const token = jwt.sign(
-		{ id: user.id },
-		'B0jICjsJ2qUaSHfOTsDT3Cs5FAxMTBp84BWxYizopn6',
-    { expiresIn: "7d" }
-	)
+  const token = jwt.sign({ id: user.id }, SECRET_KEY, { expiresIn: '7d' })
 
   return res.json({ token })
 }

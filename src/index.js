@@ -1,6 +1,10 @@
 import express from 'express'
 import db from './models/index.js'
 import routes from './routes/index.js'
+import dotenv from 'dotenv'
+
+dotenv.config()
+const PORT = process.env.PORT
 
 const app = express()
 
@@ -14,9 +18,9 @@ async function start() {
 
     await db.sequelize.sync({ alter: true })
 
-    app.listen(3000, () => {
-      console.log(`Server listening on port 3000`)
-    })
+    app.listen(PORT, () => {
+			console.log(`Server listening on port ${PORT}`)
+		})
   } catch(err) {
     console.error('Error:', err);
   }

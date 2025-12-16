@@ -1,4 +1,9 @@
 import jwt from 'jsonwebtoken'
+import dotenv from 'dotenv'
+
+dotenv.config()
+
+const SECRET_KEY = process.env.SECRET_KEY 
 
 export default function auth(req, res, next) {
 	const header = req.headers.authorization
@@ -10,10 +15,7 @@ export default function auth(req, res, next) {
 	const token = header.split(' ')[1]
 
 	try {
-		const decoded = jwt.verify(
-			token,
-			'B0jICjsJ2qUaSHfOTsDT3Cs5FAxMTBp84BWxYizopn6'
-		)
+		const decoded = jwt.verify(token, SECRET_KEY)
 		req.userId = decoded.id
 		next()
 	} catch (e) {
