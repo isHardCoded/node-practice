@@ -1,16 +1,16 @@
 import express from 'express'
-import { getAllTasks, getTaskById, createTask, updateTask, deleteTask, deleteAllTasks } from '../controllers/task.controller.js'
+import taskController from '../controllers/task.controller.js'
 import auth from '../middlewares/auth.middleware.js'
 
 const router = express.Router()
 
 router.use(auth)
 
-router.get('/', getAllTasks)
-router.get('/:id', getTaskById)
-router.post('/', createTask)
-router.put('/:id', updateTask)
-router.delete('/:id', deleteTask)
-router.delete('/', deleteAllTasks)
+router.get('/', taskController.getAllTasks)
+router.get('/:id', taskController.getTaskById)
+router.post('/', taskController.createTask)
+router.put('/:id', taskController.updateTask)
+router.delete('/:id', taskController.deleteTask)
+router.delete('/', taskController.deleteAllTasks)
 
 export default router
