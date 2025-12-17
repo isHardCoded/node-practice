@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import authService from '../services/auth.service.js'
+import authService from '../services/auth.js'
 
 const SECRET_KEY = process.env.SECRET_KEY
 

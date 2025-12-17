@@ -1,6 +1,6 @@
 import express from 'express'
-import taskRoutes from './task.routes.js'
-import authRoutes from './auth.routes.js'
+import taskRoutes from './task.js'
+import authRoutes from './auth.js'
 
 const router = express.Router()
 

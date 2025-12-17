@@ -1,6 +1,6 @@
 import express from 'express'
-import taskController from '../controllers/task.controller.js'
-import auth from '../middlewares/auth.middleware.js'
+import taskController from '../controllers/task.js'
+import auth from '../middlewares/auth.js'
 
 const router = express.Router()
 

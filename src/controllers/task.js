@@ -1,4 +1,4 @@
-import taskService from '../services/task.service.js'
+import taskService from '../services/task.js'
 
 class TaskController {
 	async getAllTasks(req, res, next) {
