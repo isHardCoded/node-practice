@@ -1,97 +1,66 @@
 import taskService from '../services/task.service.js'
 
 class TaskController {
-	async getAllTasks(req, res) {
+	async getAllTasks(req, res, next) {
 		try {
-			const tasks = await taskService.getAllTasks()
-			return res.json({ data: tasks })
+			const tasks = await taskService.getAllTasks(req.userId)
+			res.json({ data: tasks })
 		} catch (e) {
-			if (e.message === 'TASKS_NOT_FOUND') {
-				return res.json(404).json({ message: 'Задачи не найдены' })
-			}
-			return res.json(500).json({ message: 'Ошибка сервера' })
+			next(e)
 		}
 	}
 
-	async getTaskById(req, res) {
+	async getTaskById(req, res, next) {
 		try {
-			const id = req.params.id
-
-			const task = await taskService.getTaskById(id)
-
-			return res.json({ data: task })
+			const task = await taskService.getTaskById(req.params.id)
+			res.json({ data: task })
 		} catch (e) {
-			if (e.message === 'TASK_NOT_FOUND') {
-				return res.status(404).json({ message: 'Задача не найдена' })
-			}
-			return res.json(500).json({ message: 'Ошибка сервера' })
+			next(e)
 		}
 	}
 
-	async createTask(req, res) {
+	async createTask(req, res, next) {
 		try {
-			const { title, description } = req.body
+			const task = await taskService.createTask({
+				...req.body,
+				userId: req.userId,
+			})
 
-			const userId = req.userId
-
-			if (!title) {
-				return res.status(400).json({ message: 'Заполните заголовок' })
-			}
-
-			const task = await taskService.createTask(title, description, userId)
-
-			return res.status(201).json({ data: task })
+			res.status(201).json({ data: task })
 		} catch (e) {
-			if (e) {
-				return res.json(500).json({ message: 'Ошибка сервера' })
-			}
+			next(e)
 		}
 	}
 
-	async updateTask(req, res) {
+	async updateTask(req, res, next) {
 		try {
-			const id = req.params.id
-			const userId = req.userId
-			const body = req.body
+			const task = await taskService.updateTask({
+				id: req.params.id,
+				userId: req.userId,
+				body: req.body,
+			})
 
-			const task = await taskService.updateTask(id, userId, body)
-
-			return res.json({ data: task })
+			res.json({ data: task })
 		} catch (e) {
-			if (e.message === 'TASK_NOT_FOUND') {
-				return res.status(404).json({ message: 'Задача не найдена' })
-			}
-			return res.json(500).json({ message: 'Ошибка сервера' })
+			next(e)
 		}
 	}
 
-	async deleteTask(req, res) {
+	async deleteTask(req, res, next) {
 		try {
-			const id = req.params.id
-
-			await taskService.deleteTask(id)
-
-			return res.json({ message: 'Задача удалена' })
+			await taskService.deleteTask(req.params.id)
+			res.json({ message: 'Задача удалена' })
 		} catch (e) {
-			if (e.message === 'TASK_NOT_FOUND') {
-				return res.status(404).json({ message: 'Задача не найдена' })
-			}
-			return res.json(500).json({ message: 'Ошибка сервера' })
+			next(e)
 		}
 	}
 
-	async deleteAllTasks(req, res) {
+	async deleteAllTasks(req, res, next) {
 		try {
-			const userId = req.userId
-
-			await taskService.deleteAllTasks(userId)
-
-			return res.json({ message: 'Все задачи удалены' })
+			await taskService.deleteAllTasks(req.userId)
+			res.json({ message: 'Все задачи удалены' })
 		} catch (e) {
-			if (e.message === 'TASKS_NOT_FOUND') {
-				return res.json(404).json({ message: 'Задачи не найдены' })
-			}
-			return res.status(500).json({ message: 'Ошибка сервера' })
+			next(e)
 		}
 	}
 }
