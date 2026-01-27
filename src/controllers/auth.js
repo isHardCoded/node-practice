@@ -23,7 +23,7 @@ class AuthController {
 
 			const token = jwt.sign({ id: user.id }, SECRET_KEY, { expiresIn: '7d' })
 
-			res.json({ token })
+			res.json({ token, user })
 		} catch (e) {
 			next(e)
 		}

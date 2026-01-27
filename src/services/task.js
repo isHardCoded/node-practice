@@ -6,7 +6,7 @@ const { Task } = db
 
 class TaskService {
 	async getAllTasks(userId) {
-		const tasks = await Task.findAll({ where: { userId } })
+		const tasks = await Task.findAll()
 
 		if (!tasks.length) {
 			throw new AppError(ERROR_CODES.TASKS_NOT_FOUND, 404)
