@@ -7,7 +7,7 @@ const { User } = db
 const SALT_ROUNDS = 10
 
 class AuthService {
-	async register({ username, email, password }) {
+	async register({ username, email, password, birthDate, phone }) {
 		if (!username || !email || !password) {
 			throw new AppError(ERROR_CODES.INCORRECT_DATA, 400)
 		}
@@ -19,7 +19,7 @@ class AuthService {
 		}
 
 		const hash = await bcrypt.hash(password, SALT_ROUNDS)
-		return User.create({ username, email, password: hash })
+		return User.create({ username, email, password: hash, birthDate, phone })
 	}
 
 	async login({ username, password }) {

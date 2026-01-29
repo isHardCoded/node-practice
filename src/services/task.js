@@ -5,7 +5,7 @@ import { ERROR_CODES } from '../constants/errorCodes.js'
 const { Task } = db
 
 class TaskService {
-	async getAllTasks(userId) {
+	async getAllTasks() {
 		const tasks = await Task.findAll()
 
 		if (!tasks.length) {
